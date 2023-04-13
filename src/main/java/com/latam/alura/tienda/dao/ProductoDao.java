@@ -1,5 +1,7 @@
 package com.latam.alura.tienda.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.latam.alura.tienda.modelo.Producto;
@@ -15,6 +17,15 @@ public class ProductoDao {
 
 	public void guardar(Producto producto) {
 		this.em.persist(producto);
+	}
+	
+	public Producto consultaPorId(Long id) {
+		return em.find(Producto.class, id);
+	}
+	
+	public List<Producto> consultarTodos(){
+		String jqpl= "SELECT P Producto AS P";
+		return em.createQuery(jqpl,Producto.class).getResultList();
 	}
 
 }
