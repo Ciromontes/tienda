@@ -1,7 +1,6 @@
 package com.latam.alura.tienda.prueba;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -20,8 +19,9 @@ public class RegistroDeProducto {
 		Producto producto = productoDao.consultaPorId(1l);
 		System.out.println(producto.getNombre());
 		
-		List<Producto> productos = productoDao.consultarTodos();
-		productos.forEach(null);
+			
+		BigDecimal precio = productoDao.consultaPrecioPorNombreDeProducto("Samsung");
+		System.out.println(precio);
 		
 		//celulares = em.merge(celulares);		
 		//celulares.setNombre("SOFTWARES");
@@ -38,7 +38,7 @@ public class RegistroDeProducto {
 
 	private static void registrarProducto() {
 		Categoria celulares = new Categoria("CELULARES");  
-		Producto celular= new Producto("Samsung", "Muito legal", new BigDecimal("1000"),celulares);
+		Producto celular= new Producto("Samsung", "Muy bueno", new BigDecimal("1000"),celulares);
 		
 		
 		EntityManager em = JPAUtils.getEntityManager();		
