@@ -20,7 +20,7 @@ public class RegistroDeProducto {
 		System.out.println(producto.getNombre());
 		
 			
-		BigDecimal precio = productoDao.consultaPrecioPorNombreDeProducto("Samsung");
+		BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Samsung");
 		System.out.println(precio);
 		
 		//celulares = em.merge(celulares);		
