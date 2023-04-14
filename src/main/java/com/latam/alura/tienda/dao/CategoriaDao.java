@@ -23,6 +23,11 @@ public class CategoriaDao {
 		categoria =  this.em.merge(categoria);
 		this.em.remove(categoria);
 	}
+
+	public Categoria consultaPorNombre(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
