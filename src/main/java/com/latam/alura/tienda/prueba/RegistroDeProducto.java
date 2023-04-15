@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import com.latam.alura.tienda.dao.CategoriaDao;
 import com.latam.alura.tienda.dao.ProductoDao;
 import com.latam.alura.tienda.modelo.Categoria;
+import com.latam.alura.tienda.modelo.CategoriaId;
 import com.latam.alura.tienda.modelo.Producto;
 import com.latam.alura.tienda.utils.JPAUtils;
 
@@ -14,51 +15,39 @@ public class RegistroDeProducto {
 
 	public static void main(String[] args) {
 		registrarProducto();
-		EntityManager em = JPAUtils.getEntityManager();		
-		ProductoDao productoDao = new ProductoDao(em);
-		Producto producto = productoDao.consultaPorId(1l);
-		System.out.println(producto.getNombre());
-		
-			
-		BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Samsung");
-		System.out.println(precio);
-		
-		//celulares = em.merge(celulares);		
-		//celulares.setNombre("SOFTWARES");
-		
-		//em.flush();
-		
-		//em.clear();
-		//celulares = em.merge(celulares);		
+		EntityManager em = JPAUtils.getEntityManager();
+	    ProductoDao productoDao = new ProductoDao(em);
+	    
+	    Producto producto = productoDao.consultaPorId(1l);
+	    System.out.println(producto.getNombre());
+	    
+	    BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Xiaomi Redmi");
+	    System.out.println(precio);
+	    
+	    Categoria find = em.find(Categoria.class, new CategoriaId("CELULARES","456"));
+	    
+	    System.out.println(find.getNombre());
 
-		//em.remove(celulares);
-		//em.flush();
-							
 	}
 
 	private static void registrarProducto() {
-		Categoria celulares = new Categoria("CELULARES");  
-		Producto celular= new Producto("Samsung", "Muy bueno", new BigDecimal("1000"),celulares);
-		
-		
-		EntityManager em = JPAUtils.getEntityManager();		
-		ProductoDao productoDao = new ProductoDao(em);
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		
-		em.getTransaction().begin();
-		
-		//em.persist(celulares);
-		
-		//celulares.setNombre("LIBROS");
-		
-		//em.flush();
-		//em.clear();
-		
-		categoriaDao.guardar(celulares);
-		productoDao.guardar(celular);
-	
-		em.getTransaction().commit();
-		em.close();
+		Categoria celulares = new Categoria("CELULARES");
+
+		Producto celular = new Producto("Xiaomi Redmi", "Muy bueno", new BigDecimal("800"), celulares);
+
+	    EntityManager em = JPAUtils.getEntityManager();
+	    ProductoDao productoDao = new ProductoDao(em);
+        CategoriaDao categoriaDao = new CategoriaDao(em);
+        
+	    em.getTransaction().begin();
+	    
+	    categoriaDao.guardar(celulares);
+	    productoDao.guardar(celular);	
+	    
+	    em.getTransaction().commit();
+	    em.close();
 	}
 
 }
+
+

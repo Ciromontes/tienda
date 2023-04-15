@@ -8,10 +8,9 @@ import com.latam.alura.tienda.dao.PedidoDao;
 import com.latam.alura.tienda.modelo.Pedido;
 import com.latam.alura.tienda.utils.JPAUtils;
 
-public class PruebaDeDesempeño{
+public class PruebaDeDesempeño {
 	public static void main(String[] args) throws FileNotFoundException {
-		LoadRecords.cargarRegistros();
-		
+//		LoadRecords.cargarRegistros();
 		EntityManager em = JPAUtils.getEntityManager();
 		
 		PedidoDao pedidoDao = new PedidoDao(em);
@@ -22,8 +21,5 @@ public class PruebaDeDesempeño{
 //		System.out.println(pedido.getFecha());
 //		System.out.println(pedido.getItems().size());
 		System.out.println(pedidoConCliente.getCliente().getNombre());
-		
-		
-		
 	}
 }

@@ -8,14 +8,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@SuppressWarnings("all")
 @Entity
-@Table(name = "productos")
-@NamedQuery(name="Producto.consultaDePrecio", query ="SELECT P.precio FROM Producto AS P WHERE P.nombre=:nombre")
-public class Producto {
+@Table(name="productos")
+@NamedQuery(name="Producto.consultarPrecioPorNombre", query="SELECT P.precio FROM Producto AS P WHERE P.nombre=:nombre")
+@Inheritance(strategy=InheritanceType.JOINED)
+public class Producto{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -23,19 +28,16 @@ public class Producto {
 	private String nombre;
 	private String descripcion;
 	private BigDecimal precio;
-	private LocalDate fechaDeRegistro = LocalDate.now();
+	private LocalDate fechaDeRegistro= LocalDate.now();
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Categoria categoria;
-	
-	
-	
-	
+
 	
 	public Producto() {
+		
 	}
 	public Producto(String nombre, String descripcion, BigDecimal precio, Categoria categoria) {
-		
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -44,9 +46,7 @@ public class Producto {
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -65,5 +65,4 @@ public class Producto {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	
 }
